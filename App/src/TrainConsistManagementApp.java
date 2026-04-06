@@ -1,5 +1,26 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+// Bogie class
+class Bogie
+{
+    String name;
+    int capacity;
+
+    // Constructor
+    Bogie(String name, int capacity)
+    {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    // Display method
+    public String toString()
+    {
+        return name + " - Capacity: " + capacity;
+    }
+}
 
 public class TrainConsistManagementApp {
 
@@ -7,25 +28,31 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create HashMap for bogie capacity mapping
-        HashMap<String, Integer> bogieCapacity = new HashMap<>();
+        // Create list of bogies
+        List<Bogie> passengerBogies = new ArrayList<>();
 
-        // Insert bogie capacities
-        bogieCapacity.put("Sleeper", 72);
-        bogieCapacity.put("AC Chair", 54);
-        bogieCapacity.put("First Class", 24);
+        // Add bogies
+        passengerBogies.add(new Bogie("Sleeper",72));
+        passengerBogies.add(new Bogie("AC Chair",54));
+        passengerBogies.add(new Bogie("First Class",24));
 
-        System.out.println("\nBogie Capacity Details:");
-
-        // Iterate using entrySet()
-        for(Map.Entry<String, Integer> entry : bogieCapacity.entrySet())
+        System.out.println("\nBefore Sorting:");
+        for(Bogie b : passengerBogies)
         {
-            System.out.println("Bogie: " + entry.getKey() +
-                    " | Capacity: " + entry.getValue());
+            System.out.println(b);
         }
 
-        System.out.println("\nTotal bogie types: "
-                + bogieCapacity.size());
+        // Sorting using Comparator
+        passengerBogies.sort(
+                Comparator.comparingInt(b -> b.capacity)
+        );
+
+        System.out.println("\nAfter Sorting (by Capacity):");
+
+        for(Bogie b : passengerBogies)
+        {
+            System.out.println(b);
+        }
 
     }
 }
